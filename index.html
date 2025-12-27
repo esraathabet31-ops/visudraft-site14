@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Booking Prototype</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+        }
+        /* Hide scrollbar for clean mobile look */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        
+        /* Custom styling for number inputs to match sketch */
+        input[type=number]::-webkit-inner-spin-button, 
+        input[type=number]::-webkit-outer-spin-button {  
+            opacity: 1;
+            height: 30px;
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen p-4">
+
+    <!-- Mobile Device Frame -->
+    <div class="relative w-full max-w-md bg-white h-[800px] rounded-[3rem] shadow-2xl border-8 border-gray-800 overflow-hidden flex flex-col">
+        
+        <!-- Phone Notch/Speaker Area (Visual Flourish) -->
+        <div class="absolute top-0 left-1/2 transform -translate-x-1/2 w-32 h-6 bg-gray-800 rounded-b-xl z-20"></div>
+
+        <!-- Screen Content Area -->
+        <div class="flex-1 overflow-y-auto no-scrollbar relative pt-8">
+            
+            <!-- SCREEN 1: SEARCH FORM -->
+            <div id="screen-home" class="p-6 transition-opacity duration-300 ease-in-out">
+                
+                <!-- Header -->
+                <div class="flex justify-between items-center mb-8">
+                    <div class="text-xl font-bold tracking-tighter">LOGO</div>
+                </div>
+
+                <!-- Title -->
+                <h1 class="text-3xl font-bold text-center text-gray-800 mb-8">Lorem Ipsum</h1>
+
+                <!-- Form -->
+                <form id="booking-form" onsubmit="event.preventDefault(); navigateTo('screen-success');">
+                    
+                    <!-- From -->
+                    <div class="mb-5">
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">From</label>
+                        <div class="relative">
+                            <input type="text" placeholder="New York, USA" class="w-full border border-gray-300 rounded-lg p-3 pr-10 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition" required>
+                            <div class="absolute inset-y-0 right-0 flex items-center px-3 pointer-events-none border-l border-gray-200 bg-gray-50 rounded-r-lg">
+                                <i class="fas fa-caret-down text-gray-500"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- To -->
+                    <div class="mb-5">
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">To</label>
+                        <div class="relative">
+                            <input type="text" placeholder="London, UK" class="w-full border border-gray-300 rounded-lg p-3 pr-10 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition" required>
+                            <div class="absolute inset-y-0 right-0 flex items-center px-3 pointer-events-none border-l border-gray-200 bg-gray-50 rounded-r-lg">
+                                <i class="fas fa-caret-down text-gray-500"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Dates Row -->
+                    <div class="flex gap-4 mb-5">
+                        <!-- Fly Out -->
+                        <div class="flex-1">
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">Fly out</label>
+                            <div class="flex">
+                                <input type="date" class="w-full border border-gray-300 rounded-l-lg p-3 focus:ring-2 focus:ring-blue-500 outline-none text-sm" required>
+                                <div class="bg-gray-100 border border-l-0 border-gray-300 rounded-r-lg p-3 flex items-center justify-center text-gray-500">
+                                    <i class="far fa-calendar-alt"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Fly Back -->
+                        <div class="flex-1">
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">Fly back</label>
+                            <div class="flex">
+                                <input type="date" class="w-full border border-gray-300 rounded-l-lg p-3 focus:ring-2 focus:ring-blue-500 outline-none text-sm">
+                                <div class="bg-gray-100 border border-l-0 border-gray-300 rounded-r-lg p-3 flex items-center justify-center text-gray-500">
+                                    <i class="far fa-calendar-alt"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Passengers Row -->
+                    <div class="flex gap-4 mb-10">
+                        <!-- Adults -->
+                        <div class="flex-1">
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">Adults</label>
+                            <input type="number" min="1" value="1" class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-blue-500 outline-none">
+                        </div>
+                        <!-- Children -->
+                        <div class="flex-1">
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">Children</label>
+                            <input type="number" min="0" value="0" class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-blue-500 outline-none">
+                        </div>
+                    </div>
+
+                    <!-- Continue Button -->
+                    <button type="submit" class="w-full bg-gray-900 text-white font-bold py-4 rounded-lg shadow-lg hover:bg-gray-800 transform active:scale-[0.98] transition-all duration-200 uppercase tracking-wide">
+                        Continue
+                    </button>
+
+                </form>
+            </div>
+
+            <!-- SCREEN 2: SUCCESS / CONFIRMATION (Hidden by default) -->
+            <div id="screen-success" class="hidden p-6 h-full flex flex-col items-center justify-center text-center transition-opacity duration-300 ease-in-out">
+                <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mb-6 text-green-600 animate-bounce">
+                    <i class="fas fa-check text-3xl"></i>
+                </div>
+                <h2 class="text-2xl font-bold text-gray-800 mb-2">Flights Found!</h2>
+                <p class="text-gray-500 mb-8">We found 12 flights matching your criteria.</p>
+                
+                <div class="w-full bg-white border border-gray-200 rounded-xl p-4 shadow-sm mb-4 text-left">
+                    <div class="flex justify-between mb-2">
+                        <span class="font-bold text-lg">LGA</span>
+                        <i class="fas fa-plane text-gray-400"></i>
+                        <span class="font-bold text-lg">LHR</span>
+                    </div>
+                    <div class="text-sm text-gray-500">10:00 AM - 10:00 PM</div>
+                    <div class="mt-2 font-bold text-blue-600">$450</div>
+                </div>
+
+                <button onclick="navigateTo('screen-home')" class="mt-auto w-full border-2 border-gray-200 text-gray-700 font-bold py-3 rounded-lg hover:bg-gray-50 transition">
+                    Back to Search
+                </button>
+            </div>
+
+        </div>
+
+        <!-- Home Button (Visual) -->
+        <div class="h-16 bg-white border-t border-gray-100 flex items-center justify-center shrink-0">
+            <div class="w-12 h-12 rounded-full border-2 border-gray-300"></div>
+        </div>
+    </div>
+
+    <!-- Navigation Logic -->
+    <script>
+        function navigateTo(screenId) {
+            // Hide all screens
+            document.getElementById('screen-home').classList.add('hidden');
+            document.getElementById('screen-success').classList.add('hidden');
+            
+            // Show target screen with a slight fade effect logic
+            const target = document.getElementById(screenId);
+            target.classList.remove('hidden');
+            
+            // Reset scroll
+            document.querySelector('.overflow-y-auto').scrollTop = 0;
+        }
+    </script>
+
+    <!-- REMOTE AUDIT AGENT SCRIPT -->
+    <style>
+      .audit-highlight { 
+        outline: 4px solid #6366f1 !important; 
+        outline-offset: 2px !important;
+        transition: outline 0.2s ease-in-out;
+        box-shadow: 0 0 15px rgba(99, 102, 241, 0.5) !important;
+      }
+    </style>
+    <script>
+      window.addEventListener('message', (event) => {
+        const { type, targetSelector, text, actionId } = event.data;
+        
+        const findElement = (selector, searchText) => {
+          if (selector) {
+            try {
+              const el = document.querySelector(selector);
+              if (el) return el;
+            } catch(e) {}
+          }
+          // Fallback: search by text content in interactive elements
+          const interactives = Array.from(document.querySelectorAll('button, a, input, label, [role="button"], summary'));
+          return interactives.find(el => 
+            el.innerText?.toLowerCase().includes((searchText || selector || '').toLowerCase()) ||
+            el.placeholder?.toLowerCase().includes((searchText || selector || '').toLowerCase())
+          );
+        };
+
+        const element = findElement(targetSelector, text);
+
+        if (type === 'GET_COORDS') {
+          const target = element || document.body;
+          const rect = target.getBoundingClientRect();
+          window.parent.postMessage({ 
+            type: 'COORDS_RESPONSE', 
+            actionId,
+            coords: { 
+              x: rect.left + rect.width / 2, 
+              y: rect.top + rect.height / 2 
+            } 
+          }, '*');
+          return;
+        }
+
+        if (!element) return;
+
+        // Apply visual highlight
+        element.classList.add('audit-highlight');
+        setTimeout(() => element.classList.remove('audit-highlight'), 1000);
+
+        if (type === 'CLICK') {
+          // Trigger a real user click sequence
+          element.focus();
+          const clickEvent = new MouseEvent('click', { bubbles: true, cancelable: true, view: window });
+          element.dispatchEvent(clickEvent);
+          // Fallback for elements that don't respond to standard click dispatch
+          if (typeof element.click === 'function') element.click();
+        } else if (type === 'TYPE') {
+          element.focus();
+          element.value = text || '';
+          // Dispatch events to trigger UI framework updates (React/Vue/etc compatibility)
+          element.dispatchEvent(new Event('input', { bubbles: true }));
+          element.dispatchEvent(new Event('change', { bubbles: true }));
+          element.dispatchEvent(new KeyboardEvent('keyup', { bubbles: true, key: 'Enter' }));
+        }
+      });
+    </script>
+</body>
+</html>
